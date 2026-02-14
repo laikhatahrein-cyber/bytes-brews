@@ -2,7 +2,7 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# [QWIK SERVE] 🎯
 
 ## Basic Details
 
@@ -13,16 +13,16 @@
 - Member 2: [fathima dhilna] - [emea college of arts and science]
 
 ### Hosted Project Link
-[mention your project hosted link here]
+[https://laikhatahrein-cyber.github.io/bytes-brews/]
 
 ### Project Description
-[2-3 lines about what your project does]
+[This website is a digital food ordering platform designed to simplify the canteen experience by reducing long queues and waiting time. Students and staff can view the live menu, check available items, and place orders online directly through the system. The platform improves efficiency, saves time, and enhances convenience by allowing users to order food digitally before reaching the counter. It also helps canteen management organize orders better and provide faster service.]
 
 ### The Problem statement
-[What problem are you solving?]
+[In traditional canteen systems, students and staff often face long queues, limited visibility of available menu items, and delays in placing orders, especially during peak hours. This leads to time wastage, crowding, and inefficient order management for both customers and canteen staff. There is a need for a digital solution that allows users to view the live menu and place orders online, reducing waiting time and improving overall efficiency.]
 
 ### The Solution
-[How are you solving it?]
+[The proposed solution is a digital canteen food ordering website that enables users to view a live menu and place orders online. This system eliminates the need to stand in long queues by allowing pre-ordering through a simple and user-friendly interface. Orders are sent directly to the canteen staff for preparation, improving efficiency, reducing waiting time, and enhancing the overall food ordering experience for both customers and management.]
 
 ---
 
@@ -418,3 +418,4 @@ This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LI
 ---
 
 Made with ❤️ at TinkerHub
+
