@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QwikServe Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-box">
+        <h1>QwikServe</h1>
+        <p class="tagline">Login to Continue</p>
+
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="signup-text">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </p>
+    </div>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get username and password from form
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    // Check if localStorage has users
+    const users = JSON.parse(localStorage.getItem('users'));
+    
+    // Debug: Check what's in localStorage
+    console.log('Raw localStorage users:', localStorage.getItem('users'));
+    console.log('Parsed users:', users);
+    
+    // Check if users exist in localStorage
+    if (!users) {
+        alert('No users found in database. Please sign up first.');
+        return;
+    }
+    
+    if (users.length === 0) {
+        alert('No users registered yet. Please sign up first.');
+        return;
+    }
+    
+    // Find user with matching username and password
+    const user = users.find(u => u.username === username && u.password === password);
+    
+    // Debug: Log the found user
+    console.log('Found user:', user);
+    
+    if (user) {
+        alert('Login successful! Welcome ' + (user.fullName || user.username));
+        
+        // Check role and redirect accordingly
+        if (user.role === 'admin') {
+            window.location.href = 'managemenu.html';
+        } else {
+            window.location.href = 'ordr.html';
+        }
+    } else {
+        // Check if username exists but password is wrong
+        const usernameExists = users.some(u => u.username === username);
+        if (usernameExists) {
+            alert('Incorrect password!');
+        } else {
+            alert('Username not found!');
+        }
+    }
+    
+    // Clear password field
+    document.getElementById('password').value = '';
+});
+
+// Optional: Display number of registered users on page load
+window.addEventListener('load', function() {
+    const users = JSON.parse(localStorage.getItem('users'));
+    if (users && users.length > 0) {
+        console.log(`Total registered users: ${users.length}`);
+        console.log('Registered usernames:', users.map(u => u.username));
+    } else {
+        console.log('No users registered yet');
+    }
+});
+</script>
+
+</body>
+</html>

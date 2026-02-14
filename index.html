@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QwikServe</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #c59552;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background: #3a2e0c;
+    padding: 50px 40px;
+    border-radius: 25px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    width: 350px;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    color: #d1b865;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background: #d1b865;
+    color: #3a2e0c;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #fff;
+    color: #3a2e0c;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Welcome to QwikServe</h1>
+
+  <button id="loginBtn">Login</button>
+  <button id="signupBtn">Sign Up</button>
+</div>
+
+<script>
+  // Redirect to login page
+  document.getElementById("loginBtn").addEventListener("click", function() {
+    window.location.href = "sign.html";
+  });
+
+  // Redirect to signup page
+  document.getElementById("signupBtn").addEventListener("click", function() {
+    window.location.href = "signup.html";
+  });
+</script>
+
+</body>
+</html>

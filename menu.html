@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Menu</title>
+
+<style>
+body {
+margin:0;
+font-family:Arial;
+background:#c59552;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#3a2e0c;
+padding:40px;
+border-radius:15px;
+color:white;
+width:300px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:none;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#4a3514;
+color:#d1b865d4;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Menu Item</h2>
+
+<form id="menuForm">
+
+<label>Category</label>
+<select id="category" required>
+<option value="">Select Category</option>
+<option value="Drinks">Drinks</option>
+<option value="Snacks">Snacks</option>
+<option value="Desserts">Desserts</option>
+</select>
+
+<label>Item Name</label>
+<input type="text" id="name" required>
+
+<label>Item Price</label>
+<input type="number" id="price" required>
+
+<label>Image URL</label>
+<input type="text" id="image" placeholder="Paste Image URL here" required>
+
+<button type="submit">Add Item</button>
+
+</form>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+document.getElementById("menuForm").addEventListener("submit", function(event){
+
+event.preventDefault();
+
+let name = document.getElementById("name").value;
+let price = document.getElementById("price").value;
+let category = document.getElementById("category").value;
+let image = document.getElementById("image").value;
+
+let menuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
+
+menuItems.push({
+name:name,
+price:price,
+category:category,
+image:image
+});
+
+localStorage.setItem("menuItems", JSON.stringify(menuItems));
+
+alert("Item Added!");
+
+document.getElementById("menuForm").reset();
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Manage Menu</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#c59552;
+  padding:30px;
+}
+
+h1{
+  text-align:center;
+  color:#3a2e0c;
+}
+
+.top-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.top-button button {
+  padding: 12px 25px;
+  background: #d1b865;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #3a2e0c;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.top-button button:hover {
+  background: #fff;
+}
+
+.menu-container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.card{
+  background:#3a2e0c;
+  width:250px;
+  padding:15px;
+  border-radius:15px;
+  color:white;
+  text-align:center;
+  position:relative;
+}
+
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.stock-label{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:red;
+  padding:5px 10px;
+  border-radius:10px;
+  font-size:12px;
+}
+
+.btn{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.edit{
+  background:#d1b865d4;
+  color:#3a2e0c;
+}
+
+.delete{
+  background:#8b0000;
+  color:white;
+}
+
+.stock{
+  background:orange;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Manage Menu Items</h1>
+
+<div class="top-button">
+  <button id="goOrdersBtn">Go to Orders</button>
+</div>
+
+<div class="menu-container" id="menuContainer"></div>
+
+<script>
+
+function loadMenu(){
+
+  let menuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
+
+  let container = document.getElementById("menuContainer");
+
+  container.innerHTML = "";
+
+  menuItems.forEach((item,index)=>{
+
+    container.innerHTML += `
+
+    <div class="card">
+
+      ${item.stock === false ? '<div class="stock-label">Out of Stock</div>' : ''}
+
+      <img src="${item.image}" alt="food">
+
+      <h3>${item.name}</h3>
+
+      <p>₹ ${item.price}</p>
+
+      <p>${item.category}</p>
+
+      <button class="btn edit" onclick="editItem(${index})">Edit</button>
+
+      <button class="btn delete" onclick="deleteItem(${index})">Delete</button>
+
+      <button class="btn stock" onclick="toggleStock(${index})">
+        ${item.stock === false ? 'Mark In Stock' : 'Mark Out of Stock'}
+      </button>
+
+    </div>
+
+    `;
+
+  });
+
+}
+
+function deleteItem(index){
+
+  let menuItems = JSON.parse(localStorage.getItem("menuItems"));
+
+  menuItems.splice(index,1);
+
+  localStorage.setItem("menuItems",JSON.stringify(menuItems));
+
+  loadMenu();
+
+}
+
+function editItem(index){
+
+  let menuItems = JSON.parse(localStorage.getItem("menuItems"));
+
+  let item = menuItems[index];
+
+  let newName = prompt("Enter New Name",item.name);
+  let newPrice = prompt("Enter New Price",item.price);
+  let newCategory = prompt("Enter New Category",item.category);
+  let newImage = prompt("Enter New Image URL",item.image);
+
+  menuItems[index] = {
+    name:newName,
+    price:newPrice,
+    category:newCategory,
+    image:newImage,
+    stock:item.stock
+  };
+
+  localStorage.setItem("menuItems",JSON.stringify(menuItems));
+
+  loadMenu();
+
+}
+
+/* ✅ STOCK TOGGLE FUNCTION */
+function toggleStock(index){
+
+  let menuItems = JSON.parse(localStorage.getItem("menuItems"));
+
+  menuItems[index].stock = menuItems[index].stock === false ? true : false;
+
+  localStorage.setItem("menuItems",JSON.stringify(menuItems));
+
+  loadMenu();
+
+}
+
+/* GO TO ORDERS BUTTON */
+document.getElementById("goOrdersBtn").addEventListener("click", function(){
+  window.location.href = "admin-order.html";
+});
+
+loadMenu();
+
+</script>
+
+</body>
+</html>

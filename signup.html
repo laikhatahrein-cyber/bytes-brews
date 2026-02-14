@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QwikServe Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="signup-container">
+    <div class="signup-box">
+        <h1>QwikServe</h1>
+        <p class="tagline">Create Your Account</p>
+
+        <form id="signupForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            
+            <!-- Role selection dropdown -->
+            <select id="role" required style="padding: 1rem 1.2rem; border: 2px solid #e2eaf1; border-radius: 24px; font-size: 0.95rem; width: 100%;">
+                <option value="" disabled selected>Select Role</option>
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p class="login-text">
+            Already have an account? <a href="login.html">Login</a>
+        </p>
+    </div>
+</div>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const role = document.getElementById('role').value;
+    
+    // Basic validation
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+    }
+    
+    if (!role) {
+        alert('Please select a role!');
+        return;
+    }
+    
+    // Get existing users from localStorage
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    // Check if username already exists
+    if (users.some(user => user.username === username)) {
+        alert('Username already exists!');
+        return;
+    }
+    
+    // Check if email already exists
+    if (users.some(user => user.email === email)) {
+        alert('Email already registered!');
+        return;
+    }
+    
+    // Create new user object with role
+    const newUser = {
+        id: Date.now(),
+        fullName: fullName,
+        email: email,
+        username: username,
+        password: password,
+        role: role,
+        createdAt: new Date().toISOString()
+    };
+    
+    // Add new user to array
+    users.push(newUser);
+    
+    // Save to localStorage
+    localStorage.setItem('users', JSON.stringify(users));
+    
+    alert('Registration successful! Redirecting to login page...');
+    
+    // Redirect to sign.html (login page)
+    setTimeout(function() {
+        window.location.href = 'sign.html';
+    }, 1000);
+});
+</script>
+
+</body>
+</html>

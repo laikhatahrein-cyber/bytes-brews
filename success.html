@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Placed</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#c59552;
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+}
+
+/* CARD */
+
+.box{
+background:#3a2e0c;
+padding:40px;
+border-radius:25px;
+text-align:center;
+color:white;
+width:350px;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+position:relative;
+}
+
+/* PANDA */
+
+.panda{
+font-size:80px;
+animation:jump 1s infinite;
+}
+
+@keyframes jump{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+}
+
+/* HEARTS */
+
+.heart{
+position:absolute;
+color:#ff6b81;
+animation:float 3s linear infinite;
+font-size:20px;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-150px);opacity:0;}
+}
+
+/* CHECK */
+
+.checkmark{
+width:80px;
+height:80px;
+border-radius:50%;
+background:#d1b865;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:10px auto;
+animation:pop .5s ease;
+}
+
+.checkmark:after{
+content:'✔';
+font-size:40px;
+color:#3a2e0c;
+}
+
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1);}
+}
+
+/* STATUS */
+
+.status{
+margin-top:10px;
+padding:10px;
+border-radius:10px;
+font-weight:bold;
+}
+
+button{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+background:#d1b865;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="panda">🐼</div>
+
+<div class="checkmark"></div>
+
+<h2>Yay! Order Placed!</h2>
+
+<p id="orderId"></p>
+
+<div id="orderStatus" class="status"></div>
+
+<!-- <button onclick="goHome()">Back to Menu</button> -->
+
+</div>
+
+<!-- FLOATING HEARTS -->
+<div class="heart" style="left:20%;animation-delay:0s;">💓</div>
+<div class="heart" style="left:50%;animation-delay:1s;">💖</div>
+<div class="heart" style="left:70%;animation-delay:2s;">💗</div>
+
+<script>
+
+/* GET LATEST ORDER */
+
+let latestOrder = JSON.parse(localStorage.getItem("latestOrder"));
+
+if(latestOrder){
+document.getElementById("orderId").innerText="Order ID: "+latestOrder.orderId;
+}
+
+/* CHECK STATUS EVERY 1 SECOND */
+
+function checkOrderStatus(){
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let currentOrder = orders.find(o => o.orderId === latestOrder.orderId);
+
+if(!currentOrder) return;
+
+let statusBox = document.getElementById("orderStatus");
+
+let status = currentOrder.status || "Preparing";
+
+/* PREPARING */
+if(status === "Preparing"){
+statusBox.innerText="⏳ Preparing your yummy order...";
+statusBox.style.background="orange";
+}
+
+/* READY */
+if(status === "Ready"){
+statusBox.innerText="🍽️ Yay! Your Order is Ready!";
+statusBox.style.background="green";
+}
+
+/* TAKEN */
+if(status === "Taken by Customer"){
+statusBox.innerText="✅ Order Collected! Enjoy!";
+statusBox.style.background="gray";
+}
+
+}
+
+/* RUN EVERY 1 SECOND */
+setInterval(checkOrderStatus,1000);
+
+checkOrderStatus();
+
+function goHome(){
+window.location.href="order.html";
+}
+
+</script>
+
+</body>
+</html>
