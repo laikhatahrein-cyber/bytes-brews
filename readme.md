@@ -81,13 +81,13 @@ List the key features of your project:
 
 #### Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
+![Screenshot1](create menu.png)
 *Add caption explaining what this shows*
 
-![Screenshot2](Add screenshot 2 here with proper name)
+![Screenshot2](front page.png)
 *Add caption explaining what this shows*
 
-![Screenshot3](Add screenshot 3 here with proper name)
+![Screenshot3](login.png)
 *Add caption explaining what this shows*
 
 #### Diagrams
@@ -416,5 +416,6 @@ This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LI
 ---
 
 Made with ❤️ at TinkerHub
+
 
 
