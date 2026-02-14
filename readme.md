@@ -6,11 +6,11 @@
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name: [bytes and brews]
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: [hiba nasrin] - [emea college of arts and science]
+- Member 2: [fathima dhilna] - [emea college of arts and science]
 
 ### Hosted Project Link
 [mention your project hosted link here]
